@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "callporter-stripe"
+name = "digital-nitro-stripe"
 version = "1.0"
 description = ""
 authors = ["HM <hieumdd@gmail.com>"]
@@ -21,7 +21,3 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 addopts = "-p no:warnings -s --durations=0"
-testpaths = [
-    "test",
-]
-# timeout = 530
