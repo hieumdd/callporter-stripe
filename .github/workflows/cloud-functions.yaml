@@ -22,19 +22,19 @@ jobs:
     steps:
       - if: github.ref_name == 'dev'
         run: |
-          echo "FUNCTION_NAME=real-home-mlsgrid-dev" >> $GITHUB_ENV
-          echo "PUBLIC_URL=https://us-central1-real-data-now.cloudfunctions.net/real-home-mlsgrid-dev" >> $GITHUB_ENV
+          echo "FUNCTION_NAME=digital-nitro-stripe-dev" >> $GITHUB_ENV
+          echo "PUBLIC_URL=https://us-central1-real-data-now.cloudfunctions.net/digital-nitro-stripe-dev" >> $GITHUB_ENV
 
       - if: github.ref_name == 'master'
         run: |
-          echo "FUNCTION_NAME=real-home-mlsgrid" >> $GITHUB_ENV
-          echo "PUBLIC_URL=https://us-central1-real-data-now.cloudfunctions.net/real-home-mlsgrid" >> $GITHUB_ENV
+          echo "FUNCTION_NAME=digital-nitro-stripe" >> $GITHUB_ENV
+          echo "PUBLIC_URL=https://us-central1-real-data-now.cloudfunctions.net/digital-nitro-stripe" >> $GITHUB_ENV
 
       - id: set-fn-name
         run: echo "::set-output name=fn-name::${{ env.FUNCTION_NAME}}"
 
       - run: |
-          echo "MLSGRID_TOKEN: ${{ secrets.MLSGRID_TOKEN }}" >> ${{ env.ENV_FILE }}
+          echo "STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}" >> ${{ env.ENV_FILE }}
 
           echo "GCP_SA: ${{ env.GCP_SA }}" >> ${{ env.ENV_FILE }}
           echo "PUBLIC_URL: ${{ env.PUBLIC_URL }}" >> ${{ env.ENV_FILE }}
