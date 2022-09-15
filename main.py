@@ -15,4 +15,4 @@ def main(request):
         raise ValueError(data)
 
     print(response)
-    return response
+    return {"data": response}
