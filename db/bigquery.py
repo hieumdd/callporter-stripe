@@ -10,7 +10,7 @@ def get_client():
 def get_latest(table: str):
     rows = (
         get_client()
-        .query(f"SELECT MAX(ModificationTimestamp) AS incre FROM {DATASET}.p_{table}")
+        .query(f"SELECT MAX(created) AS incre FROM {DATASET}.p_{table}")
         .result()
     )
     _start = [row for row in rows][0]["incre"]
