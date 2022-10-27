@@ -11,18 +11,22 @@ pipeline = interface.Pipeline(
             "created": row["created"],
             "name": row["name"],
             "email": row["email"],
-            "metadata": {
-                "kjb_member_id": row["metadata"].get("kjb_member_id"),
-                "street_line_1": row["metadata"].get("street_line_1"),
-                "street_line_2": row["metadata"].get("street_line_2"),
-                "city": row["metadata"].get("city"),
-                "country": row["metadata"].get("country"),
-                "region": row["metadata"].get("region"),
-                "postal_code": row["metadata"].get("postal_code"),
-                "phone_number": row["metadata"].get("phone_number"),
-            }
-            if row.get("metadata")
-            else {},
+            "tax_ids": {
+                "data": [
+                    {
+                        "id": d.get("id"),
+                        "country": d.get("country"),
+                        "created": d.get("created"),
+                        "customer": d.get("customer"),
+                        "livemode": d.get("livemode"),
+                        "type": d.get("type"),
+                        "value": d.get("value"),
+                    }
+                    for d in row["tax_ids"]["data"]
+                ]
+                if row["tax_ids"].get("data")
+                else []
+            },
         }
         for row in rows
     ],
@@ -33,18 +37,25 @@ pipeline = interface.Pipeline(
         {"name": "name", "type": "STRING"},
         {"name": "email", "type": "STRING"},
         {
-            "name": "metadata",
+            "name": "tax_ids",
             "type": "RECORD",
             "fields": [
-                {"name": "kjb_member_id", "type": "STRING"},
-                {"name": "street_line_1", "type": "STRING"},
-                {"name": "street_line_2", "type": "STRING"},
-                {"name": "city", "type": "STRING"},
-                {"name": "country", "type": "STRING"},
-                {"name": "region", "type": "STRING"},
-                {"name": "postal_code", "type": "STRING"},
-                {"name": "phone_number", "type": "STRING"},
+                {
+                    "name": "data",
+                    "type": "RECORD",
+                    "mode": "REPEATED",
+                    "fields": [
+                        {"name": "id", "type": "STRING"},
+                        {"name": "country", "type": "STRING"},
+                        {"name": "created", "type": "TIMESTAMP"},
+                        {"name": "customer", "type": "STRING"},
+                        {"name": "livemode", "type": "BOOLEAN"},
+                        {"name": "type", "type": "STRING"},
+                        {"name": "value", "type": "STRING"},
+                    ],
+                },
             ],
         },
     ],
+    options={"expand": ["data.tax_ids"]},
 )

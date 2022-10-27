@@ -5,7 +5,7 @@ from stripe_module.service import pipeline_service
 
 TIMEFRAME = [
     ("auto", (None, None)),
-    ("manual", ("2022-01-01", "2022-10-01")),
+    ("manual", ("2022-01-01", "2022-11-01")),
 ]
 
 
