@@ -1,6 +1,7 @@
 from typing import Any, Callable
 from dataclasses import dataclass, field
 
+
 @dataclass
 class Pipeline:
     name: str

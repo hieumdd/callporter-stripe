@@ -12,6 +12,11 @@ def main(request):
             data.get("start"),
             data.get("end"),
         )
+    elif "tasks" in data:
+        response = service.tasks_service(
+            data.get("start"),
+            data.get("end"),
+        )
     else:
         raise ValueError(data)
 

@@ -34,7 +34,9 @@ jobs:
         run: echo "::set-output name=fn-name::${{ env.FUNCTION_NAME}}"
 
       - run: |
-          echo "STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}" >> ${{ env.ENV_FILE }}
+          echo "BALLPOINT_MARKETING_STRIPE_API_KEY: ${{ secrets.BALLPOINT_MARKETING_STRIPE_API_KEY }}" >> ${{ env.ENV_FILE }}
+          echo "CALL_PORTER_STRIPE_API_KEY: ${{ secrets.CALL_PORTER_STRIPE_API_KEY }}" >> ${{ env.ENV_FILE }}
+          echo "CREATE_CASH_FLOW_STRIPE_API_KEY: ${{ secrets.CREATE_CASH_FLOW_STRIPE_API_KEY }}" >> ${{ env.ENV_FILE }}
 
           echo "GCP_SA: ${{ env.GCP_SA }}" >> ${{ env.ENV_FILE }}
           echo "PUBLIC_URL: ${{ env.PUBLIC_URL }}" >> ${{ env.ENV_FILE }}
