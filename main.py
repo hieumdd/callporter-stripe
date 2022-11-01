@@ -1,4 +1,4 @@
-from stripe_module import pipeline, service
+from stripe_module import accounts, pipeline, service
 
 
 def main(request):
@@ -8,6 +8,7 @@ def main(request):
     if "table" in data:
         response = service.pipeline_service(
             pipeline.pipelines[data["table"]],
+            accounts.accounts[data["name"]],
             data.get("start"),
             data.get("end"),
         )
