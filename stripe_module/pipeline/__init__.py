@@ -6,7 +6,7 @@ pipelines = {
         j.pipeline
         for j in [
             charge,
-            # customer,
+            customer,
         ]
     ]
 }
