@@ -15,16 +15,17 @@ def pipeline_service(
     start: Optional[str],
     end: Optional[str],
 ):
+    table = f"{pipeline.name}__{account.name}"
     _start = (
         datetime.strptime(start, "%Y-%m-%d")
         if start
-        else bigquery.get_latest(pipeline.name)
+        else bigquery.get_latest(table)
     )
 
     _end = datetime.strptime(end, "%Y-%m-%d") if end else datetime.utcnow()
 
     return compose(
-        bigquery.load(f"{pipeline.name}__{account.name}", pipeline.schema),
+        bigquery.load(table, pipeline.schema),
         pipeline.transform,
         repo.get(pipeline.module, account.api_key, pipeline.options),
     )((_start, _end))
